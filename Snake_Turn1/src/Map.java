@@ -4,8 +4,8 @@ import java.util.*;
 public class Map {
 	
 	private int map[][];
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	
 	public Map(int x, int y){
 		this.x = x;
