@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Map {
 	
-	private int map[][];
+	protected int map[][];
 	protected int x;
 	protected int y;
 	
@@ -44,6 +44,5 @@ public class Map {
 			}
 		}
 	}
-
 
 }
