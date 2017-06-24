@@ -4,7 +4,9 @@ public class Snake extends Map{
 	private int snake_x[];
 	private int snake_y[];
 	
-	private int snake_length = 0;
+	private int snake_length = 1;
+	private int tail_buffer_X;
+	private int tail_buffer_Y;
 	
 	private int CurrentDirection = NORTH;
 	private int NextDirection = NORTH;
@@ -67,12 +69,9 @@ public class Snake extends Map{
 				CurrentDirection = NextDirection;
 		}
 	}
-	
+
 	private void move(){
-		for(int i = snake_length; i>0;i--){
-			snake_x[i-1] = snake_x[i];
-			snake_y[i-1] = snake_y[i];
-		}
+
 		ScanNextMove();
 		switch(NextDirection){
 			case NORTH:
@@ -88,19 +87,43 @@ public class Snake extends Map{
 				snake_x[0]--;
 				break;
 		}
+		tail_buffer_X = snake_x[snake_length-1];
+		tail_buffer_Y = snake_y[snake_length-1];
+		for(int i = snake_length-1; i>0;i--){
+			snake_x[i] = snake_x[i-1];
+			snake_y[i] = snake_y[i-1];
+			map[snake_x[i]][snake_y[i]]=0;
+		}
 		CheckEat();
+		UpdateMap();
 	}
 	
+	public void UpdateMap(){
+		for(int i = 0; i<snake_length;i++){
+			if(i==0){
+				map[snake_x[i]][snake_y[i]]=3;
+			}else{
+				map[snake_x[i]][snake_y[i]]=2;
+			}
+		}
+	}
+
 	
 	private void CheckEat() {
 		System.out.println("CheckEat Initiate");
+		if(eat()){
+			snake_x[snake_length]=tail_buffer_X;
+			snake_y[snake_length]=tail_buffer_Y;
+			snake_length++;
+		}
 	}
-	private void eat(){
-		
+	private boolean eat(){
+		//¸Ô¾úÀ¸¸é true
+		return false;
 	}
 	
 	
-	private void RandApple(){
+	private void RandomApple(){
 		
 	}
 	
