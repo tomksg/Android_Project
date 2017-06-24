@@ -4,6 +4,8 @@ public class Snake extends Map{
 	private int snake_x[];
 	private int snake_y[];
 	
+	private int snake_length = 0;
+	
 	private int CurrentDirection = NORTH;
 	private int NextDirection = NORTH;
 	
@@ -27,10 +29,6 @@ public class Snake extends Map{
 		snake_x[0] = 3;
 		snake_y[0] = 3;
 		
-		for(int i = (x-2)*(y-2);i>0;i--){
-			map[snake_x[i][snake_y[i]
-		}
-		
 		
  	}
 	private void ScanNextMove(){
@@ -38,31 +36,31 @@ public class Snake extends Map{
 		String NextMove =scan.next();
 		switch(NextMove){
 			case "w":
-				if(CurrentDirection==WEST){
+				if(CurrentDirection==SOUTH){
 					break;
 				}else{
 					NextDirection=NORTH;
 				}
 				break;
 			case "s":
-				if(CurrentDirection==WEST){
+				if(CurrentDirection==NORTH){
 					break;
 				}else{
-					NextDirection=NORTH;
+					NextDirection=SOUTH;
 				}
 				break;
 			case "a":
-				if(CurrentDirection==WEST){
+				if(CurrentDirection==EAST){
 					break;
 				}else{
-					NextDirection=NORTH;
+					NextDirection=WEST;
 				}
 				break;
 			case "d":
 				if(CurrentDirection==WEST){
 					break;
 				}else{
-					NextDirection=NORTH;
+					NextDirection=EAST;
 				}
 				break;
 			default:
@@ -71,10 +69,40 @@ public class Snake extends Map{
 	}
 	
 	private void move(){
+		for(int i = snake_length; i>0;i--){
+			snake_x[i-1] = snake_x[i];
+			snake_y[i-1] = snake_y[i];
+		}
 		ScanNextMove();
+		switch(NextDirection){
+			case NORTH:
+				snake_y[0]--;
+				break;
+			case SOUTH:
+				snake_y[0]++;
+				break;
+			case EAST:
+				snake_x[0]++;
+				break;
+			case WEST:
+				snake_x[0]--;
+				break;
+		}
+		CheckEat();
+	}
+	
+	
+	private void CheckEat() {
+		System.out.println("CheckEat Initiate");
+	}
+	private void eat(){
 		
 	}
 	
+	
+	private void RandApple(){
+		
+	}
 	
 	
 	
