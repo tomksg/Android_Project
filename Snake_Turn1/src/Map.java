@@ -12,6 +12,9 @@ public class Map {
 		this.y = y;
 		SnakeMap();
 	}
+	public int getTotal(){
+		return (x-2)*(y-2);
+	}
 	
 	public void SnakeMap(){	
 		map = new int[x][y]; // 7,7
