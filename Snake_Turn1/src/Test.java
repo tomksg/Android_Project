@@ -8,8 +8,11 @@ public class Test {
 		Scanner scan = new Scanner(System.in);
 		x = scan.nextInt();
 		y = scan.nextInt();
-		Map map = new Map(x,y);
-		map.PrintMap();
+		Snake snake = new Snake(x,y);
+		while(true){
+			snake.move();
+		}
+		
 		
 		
 	}

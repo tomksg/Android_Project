@@ -22,18 +22,16 @@ public class Snake extends Map{
 	
 	public Snake(int x, int y) {
 		super(x, y);
-	}
-	private void initGame(){
 		initMap();
 		int snake_x[] = new int [(x-2)*(y-2)];
 		int snake_y[] = new int [(x-2)*(y-2)];
 		
 		snake_x[0] = 3;
 		snake_y[0] = 3;
-		
-		
- 	}
-	private void ScanNextMove(){
+
+	}
+	
+	public void ScanNextMove(){
 		Scanner scan = new Scanner(System.in);
 		String NextMove =scan.next();
 		switch(NextMove){
@@ -70,8 +68,7 @@ public class Snake extends Map{
 		}
 	}
 
-	private void move(){
-
+	public void move(){
 		ScanNextMove();
 		switch(NextDirection){
 			case NORTH:
@@ -96,6 +93,7 @@ public class Snake extends Map{
 		}
 		CheckEat();
 		UpdateMap();
+		PrintMap();
 	}
 	
 	public void UpdateMap(){
@@ -109,7 +107,7 @@ public class Snake extends Map{
 	}
 
 	
-	private void CheckEat() {
+	public void CheckEat() {
 		System.out.println("CheckEat Initiate");
 		if(eat()){
 			snake_x[snake_length]=tail_buffer_X;
@@ -117,13 +115,13 @@ public class Snake extends Map{
 			snake_length++;
 		}
 	}
-	private boolean eat(){
+	public boolean eat(){
 		//¸Ô¾úÀ¸¸é true
 		return false;
 	}
 	
 	
-	private void RandomApple(){
+	public void RandomApple(){
 		
 	}
 	
