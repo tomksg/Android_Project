@@ -106,6 +106,7 @@ public class Snake extends Map{
 			snake_x[i] = snake_x[i-1];
 			snake_y[i] = snake_y[i-1];
 		}
+		map[snake_x[0]][snake_y[0]] = 0;
 		ScanNextMove();
 		switch(NextDirection){
 			case NORTH:
@@ -122,8 +123,9 @@ public class Snake extends Map{
 				break;
 		}
 		CheckCollition();
+		//System.out.printf("%d = Snake_length / %d = getTotal()\n",snake_length,getTotal());
 		CheckEat();
-		System.out.printf("%d = Snake_length / %d = getTotal()\n",snake_length,getTotal());
+		//System.out.printf("%d = Snake_length / %d = getTotal()\n",snake_length,getTotal());
 	//##############check with Game#########################
 		if(Game==1){
 			return false;
@@ -181,21 +183,21 @@ public class Snake extends Map{
 	public void CheckEat() {
 		//System.out.println("CheckEat Initiate");
 		if(eat()){
-			if(snake_length==getTotal()){
-				setGame2();
-				System.out.println("Game Clear!!");
-			}else{
-				snake_x[snake_length]=tail_buffer_X;
-				snake_y[snake_length]=tail_buffer_Y;
-				snake_length++;
-				Apple_exist=0;
+			snake_x[snake_length]=tail_buffer_X;
+			snake_y[snake_length]=tail_buffer_Y;
+			snake_length++;
+			Apple_exist=0;
+			if(snake_length!=getTotal()){
 				RandomApple();
+			}else{
+				setGame2();
 			}
 		}
 
 	}
 	public boolean eat(){
 		if(snake_x[0]==Apple_x&&snake_y[0]==Apple_y){
+			//System.out.println("Apple Eat!!");
 			return true;
 		}else{
 			return false;
