@@ -38,6 +38,7 @@ public class Snake extends Map{
 		//System.out.printf("test map %d\n", map[snake_x[0]][snake_y[0]]);
 		//map[snake_x[0]][snake_y[0]]=3;
 		//PrintMap();
+		RandomApple();
 		UpdateMap();
 		
 	}
@@ -144,6 +145,9 @@ public class Snake extends Map{
 				map[snake_x[k]][snake_y[k]]=2;
 			}
 		}
+		if(Apple_exist>0){
+			map[Apple_x][Apple_y] = 5;
+		}
 		PrintMap();
 		
 	}
@@ -176,11 +180,16 @@ public class Snake extends Map{
 			snake_x[snake_length]=tail_buffer_X;
 			snake_y[snake_length]=tail_buffer_Y;
 			snake_length++;
+			Apple_exist=0;
+			RandomApple();
 		}
 	}
 	public boolean eat(){
-		//¸Ô¾úÀ¸¸é true
-		return false;
+		if(snake_x[0]==Apple_x&&snake_y[0]==Apple_y){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	
