@@ -3,6 +3,9 @@ public class Snake extends Map{
 	
 	private final int snake_x[] = new int[25];
 	private final int snake_y[] = new int[25];
+	private int Apple_x;
+	private int Apple_y;
+	private int Apple_exist = 0;
 	private int Game = 0;
 	private int snake_length = 2;
 	private int tail_buffer_X;
@@ -118,6 +121,14 @@ public class Snake extends Map{
 		}
 		CheckCollition();
 		CheckEat();
+	//##############check with Game#########################
+		if(Game==1){
+			return;
+		}else if(Game==2){
+			System.out.println("Game Clear!!");
+			return;
+		}
+	//##############check with Game#########################
 		UpdateMap();
 	}
 	
@@ -140,6 +151,7 @@ public class Snake extends Map{
 	public void setGame(){
 		Game++;
 	}
+	
 	public void CheckCollition(){
 		if(snake_x[0]==6||snake_x[0]==0||snake_y[0]==0||snake_y[0]==6){
 			System.out.println("Wall Crash!!");
@@ -173,7 +185,25 @@ public class Snake extends Map{
 	
 	
 	public void RandomApple(){
-		
+		Random random = new Random();
+		if(Apple_exist==0){
+			Apple_x = random.nextInt(x-2)+1;
+			Apple_y = random.nextInt(y-2)+1;
+			int ok = 0;
+			while(ok==0){
+				ok = 1;
+				for(int i = snake_length;i>=0;i--){
+					if(Apple_x==snake_x[i]&&Apple_y==snake_y[i]){
+						ok=0;
+						Apple_x = random.nextInt(x-2)+1;
+						Apple_y = random.nextInt(y-2)+1;
+						break;
+					}
+				}
+			}
+			Apple_exist=1;
+		}
+
 	}
 	
 	
