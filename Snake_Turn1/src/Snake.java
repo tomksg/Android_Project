@@ -97,7 +97,8 @@ public class Snake extends Map{
 	public void setXP(){
 		snake_x[0] = snake_x[0]+1;
 	}
-	public void move(){
+	
+	public boolean move(){
 		tail_buffer_X = snake_x[snake_length-1];
 		tail_buffer_Y = snake_y[snake_length-1];
 		for(int i = snake_length-1; i>0;i--){
@@ -124,13 +125,14 @@ public class Snake extends Map{
 		CheckEat();
 	//##############check with Game#########################
 		if(Game==1){
-			return;
+			return false;
 		}else if(Game==2){
 			System.out.println("Game Clear!!");
-			return;
+			return false;
 		}
 	//##############check with Game#########################
 		UpdateMap();
+		return true;
 	}
 	
 	public void UpdateMap(){
@@ -182,6 +184,9 @@ public class Snake extends Map{
 			snake_length++;
 			Apple_exist=0;
 			RandomApple();
+		}
+		if(snake_length==getTotal()){
+			Game=2;
 		}
 	}
 	public boolean eat(){
