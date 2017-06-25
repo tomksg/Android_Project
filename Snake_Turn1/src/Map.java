@@ -34,6 +34,7 @@ public class Map {
 	
 	public void GameOver(){
 		String msg = "GameOver";
+		System.out.println(msg);
 	}
 	
 	public void PrintMap(){

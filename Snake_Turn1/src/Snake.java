@@ -3,7 +3,7 @@ public class Snake extends Map{
 	
 	private final int snake_x[] = new int[25];
 	private final int snake_y[] = new int[25];
-	
+	private int Game = 0;
 	private int snake_length = 2;
 	private int tail_buffer_X;
 	private int tail_buffer_Y;
@@ -88,6 +88,13 @@ public class Snake extends Map{
 		snake_x[0] = snake_x[0]+1;
 	}
 	public void move(){
+		tail_buffer_X = snake_x[snake_length-1];
+		tail_buffer_Y = snake_y[snake_length-1];
+		for(int i = snake_length-1; i>0;i--){
+			map[snake_x[i]][snake_y[i]]=0;
+			snake_x[i] = snake_x[i-1];
+			snake_y[i] = snake_y[i-1];
+		}
 		ScanNextMove();
 		switch(NextDirection){
 			case NORTH:
@@ -97,19 +104,13 @@ public class Snake extends Map{
 				setXP();
 				break;
 			case EAST:
-				snake_y[0]++;
+				setYP();
 				break;
 			case WEST:
-				snake_y[0]--;
+				setYM();
 				break;
 		}
-		tail_buffer_X = snake_x[snake_length-1];
-		tail_buffer_Y = snake_y[snake_length-1];
-		for(int i = snake_length-1; i>0;i--){
-			snake_x[i] = snake_x[i-1];
-			snake_y[i] = snake_y[i-1];
-			map[snake_x[i]][snake_y[i]]=0;
-		}
+		CheckCollition();
 		CheckEat();
 		UpdateMap();
 	}
@@ -130,6 +131,25 @@ public class Snake extends Map{
 		
 	}
 
+	public void setGame(){
+		Game++;
+	}
+	public void CheckCollition(){
+		if(snake_x[0]==6||snake_x[0]==0||snake_y[0]==0||snake_y[0]==6){
+			System.out.println("Wall Crash!!");
+			GameOver(); // 추가할것
+			setGame();
+			return;
+		}else{
+			for(int i = snake_length;i>0;i--){
+				if(snake_x[0]==snake_x[i] && snake_y[0] == snake_y[0]){
+					System.out.println("Crash with yourself!!");
+					setGame();
+					return;				
+				}
+			}
+		}
+	}
 	
 	public void CheckEat() {
 		//System.out.println("CheckEat Initiate");
