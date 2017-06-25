@@ -9,11 +9,7 @@ public class Test {
 		x = scan.nextInt();
 		y = scan.nextInt();
 		Snake snake = new Snake(x,y);
-		while(true){
-			snake.move();
-		}
-		
-		
-		
+		while(snake.move());			
+		System.out.println("Test Finished");
 	}
 }

@@ -7,7 +7,7 @@ public class Snake extends Map{
 	private int Apple_y;
 	private int Apple_exist = 0;
 	private int Game = 0;
-	private int snake_length = 2;
+	private int snake_length = 1;
 	private int tail_buffer_X;
 	private int tail_buffer_Y;
 	
@@ -28,11 +28,11 @@ public class Snake extends Map{
 		super.SnakeMap();
 		//int snake_x[] = new int [getTotal()];
 		//int snake_y[] = new int [getTotal()];
-
-		snake_x[0] = 3;
-		snake_y[0] = 3;
-		snake_x[1] = 4;
-		snake_y[1] = 3;
+		Game = 0;
+		snake_x[0] = x/2;
+		snake_y[0] = y/2;
+		//snake_x[1] = 4;
+		//snake_y[1] = 3;
 		//System.out.printf("test x y  %d\n", getTotal());
 		//System.out.printf("test y %d\n", snake_y[0]);
 		//System.out.printf("test map %d\n", map[snake_x[0]][snake_y[0]]);
@@ -123,6 +123,7 @@ public class Snake extends Map{
 		}
 		CheckCollition();
 		CheckEat();
+		System.out.printf("%d = Snake_length / %d = getTotal()\n",snake_length,getTotal());
 	//##############check with Game#########################
 		if(Game==1){
 			return false;
@@ -156,6 +157,9 @@ public class Snake extends Map{
 
 	public void setGame(){
 		Game++;
+	}	
+	public void setGame2(){
+		Game=2;
 	}
 	
 	public void CheckCollition(){
@@ -163,14 +167,12 @@ public class Snake extends Map{
 			System.out.println("Wall Crash!!");
 			GameOver(); // 추가할것
 			setGame();
-			return;
 		}else{
 			for(int i = snake_length;i>0;i--){
 				if(snake_x[0]==snake_x[i] && snake_y[0] == snake_y[i]){
-					System.out.printf("%dx[0] %dx[%d] %dy[0] %dy[%d]\n",snake_x[0],snake_x[i],i,snake_y[0],snake_y[i],i);
+					//System.out.printf("%dx[0] %dx[%d] %dy[0] %dy[%d]\n",snake_x[0],snake_x[i],i,snake_y[0],snake_y[i],i);
 					System.out.println("Crash with yourself!!");
-					setGame();
-					return;				
+					setGame();			
 				}
 			}
 		}
@@ -179,15 +181,18 @@ public class Snake extends Map{
 	public void CheckEat() {
 		//System.out.println("CheckEat Initiate");
 		if(eat()){
-			snake_x[snake_length]=tail_buffer_X;
-			snake_y[snake_length]=tail_buffer_Y;
-			snake_length++;
-			Apple_exist=0;
-			RandomApple();
+			if(snake_length==getTotal()){
+				setGame2();
+				System.out.println("Game Clear!!");
+			}else{
+				snake_x[snake_length]=tail_buffer_X;
+				snake_y[snake_length]=tail_buffer_Y;
+				snake_length++;
+				Apple_exist=0;
+				RandomApple();
+			}
 		}
-		if(snake_length==getTotal()){
-			Game=2;
-		}
+
 	}
 	public boolean eat(){
 		if(snake_x[0]==Apple_x&&snake_y[0]==Apple_y){
