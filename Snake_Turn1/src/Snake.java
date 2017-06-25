@@ -42,12 +42,14 @@ public class Snake extends Map{
 	public void ScanNextMove(){
 		Scanner scan = new Scanner(System.in);
 		String NextMove =scan.next();
+		//System.out.printf("C %d N %d\n",CurrentDirection,NextDirection);
 		switch(NextMove){
 			case "w":
 				if(CurrentDirection==SOUTH){
 					break;
 				}else{
 					NextDirection=NORTH;
+					CurrentDirection = NextDirection;
 				}
 				break;
 			case "s":
@@ -55,6 +57,7 @@ public class Snake extends Map{
 					break;
 				}else{
 					NextDirection=SOUTH;
+					CurrentDirection = NextDirection;
 				}
 				break;
 			case "a":
@@ -62,6 +65,7 @@ public class Snake extends Map{
 					break;
 				}else{
 					NextDirection=WEST;
+					CurrentDirection = NextDirection;
 				}
 				break;
 			case "d":
@@ -69,11 +73,13 @@ public class Snake extends Map{
 					break;
 				}else{
 					NextDirection=EAST;
+					CurrentDirection = NextDirection;
 				}
 				break;
 			default:
 				CurrentDirection = NextDirection;
 		}
+		//System.out.printf("C %d N %d\n",CurrentDirection,NextDirection);
 	}
 	public void setXM(){
 		snake_x[0] = snake_x[0]-1;
@@ -142,7 +148,8 @@ public class Snake extends Map{
 			return;
 		}else{
 			for(int i = snake_length;i>0;i--){
-				if(snake_x[0]==snake_x[i] && snake_y[0] == snake_y[0]){
+				if(snake_x[0]==snake_x[i] && snake_y[0] == snake_y[i]){
+					System.out.printf("%dx[0] %dx[%d] %dy[0] %dy[%d]\n",snake_x[0],snake_x[i],i,snake_y[0],snake_y[i],i);
 					System.out.println("Crash with yourself!!");
 					setGame();
 					return;				
